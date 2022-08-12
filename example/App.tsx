@@ -8,7 +8,7 @@
  * @format
  */
 
-import React, {type PropsWithChildren} from 'react';
+import React, {useEffect, type PropsWithChildren} from 'react';
 import {
   SafeAreaView,
   ScrollView,
@@ -26,6 +26,21 @@ import {
   LearnMoreLinks,
   ReloadInstructions,
 } from 'react-native/Libraries/NewAppScreen';
+
+import {
+  auth as SpotifyAuth,
+  remote as SpotifyRemote,
+  ApiScope,
+  ApiConfig,
+} from "react-native-spotify-remote";
+
+const spotifyConfig: ApiConfig = {
+  clientID: "SPOTIFY_CLIENT_ID",
+  redirectURL: "SPOTIFY_REDIRECT_URL",
+  tokenRefreshURL: "SPOTIFY_TOKEN_REFRESH_URL",
+  tokenSwapURL: "SPOTIFY_TOKEN_SWAP_URL",
+  scopes: [ApiScope.AppRemoteControlScope, ApiScope.UserFollowReadScope],
+};
 
 const Section: React.FC<
   PropsWithChildren<{
@@ -64,6 +79,17 @@ const App = () => {
     backgroundColor: isDarkMode ? Colors.darker : Colors.lighter,
   };
 
+  useEffect(() => {
+    async function authMe() {
+      try {
+        const session = await SpotifyAuth.authorize(spotifyConfig);
+      } catch (err) {
+        console.error("Couldn't authorize with or connect to Spotify", err);
+      }
+    }
+
+    authMe();
+  }, []);
   return (
     <SafeAreaView style={backgroundStyle}>
       <StatusBar barStyle={isDarkMode ? 'light-content' : 'dark-content'} />

@@ -1,187 +1,196 @@
 import React, { ReactNode } from 'react';
 import {
-    auth,
-    remote,
-    ApiConfig,
-    ApiScope,
-    SpotifyRemoteApi,
-    PlayerState,
-    PlayerContext,
-    SpotifyAuth
+  auth,
+  remote,
+  ApiConfig,
+  ApiScope,
+  SpotifyRemoteApi,
+  PlayerState,
+  PlayerContext,
+  SpotifyAuth,
 } from 'react-native-spotify-remote';
 import Config from 'react-native-config';
 
 interface AuthOptions {
-    playURI?: string;
-    showDialog?: boolean;
-    autoConnect?: boolean;
-    authType?: ApiConfig["authType"]
+  playURI?: string;
+  showDialog?: boolean;
+  autoConnect?: boolean;
+  authType?: ApiConfig['authType'];
 }
 
 interface AppContextState {
-    error?: Error & { code?: any };
-    playerState?: PlayerState;
-    token?: string;
-    isConnected?: boolean;
+  error?: Error & { code?: any };
+  playerState?: PlayerState;
+  token?: string;
+  isConnected?: boolean;
 }
 
 export interface AppContextProps extends AppContextState {
-    onError: (err: Error) => void;
-    authenticate: (options?: AuthOptions) => void;
-    clearError: () => void;
-    endSession: () => void;
-    remote: SpotifyRemoteApi,
-    auth: SpotifyAuth
+  onError: (err: Error) => void;
+  authenticate: (options?: AuthOptions) => void;
+  clearError: () => void;
+  endSession: () => void;
+  remote: SpotifyRemoteApi;
+  auth: SpotifyAuth;
 }
 
-const noop = () => { };
+const noop = () => {};
 const DefaultContext: AppContextProps = {
-    onError: noop,
-    authenticate: noop,
-    clearError: noop,
-    endSession: noop,
-    remote,
-    auth
-}
+  onError: noop,
+  authenticate: noop,
+  clearError: noop,
+  endSession: noop,
+  remote,
+  auth,
+};
 
 const AppContext = React.createContext<AppContextProps>(DefaultContext);
 
-class AppContextProvider extends React.Component<{ children: ReactNode}, AppContextState> {
-    state = {
-        isConnected: false
-    }
+class AppContextProvider extends React.Component<
+  { children: ReactNode },
+  AppContextState
+> {
+  state = {
+    isConnected: false,
+  };
 
-    constructor(props: any) {
-        super(props);
-        this.onError = this.onError.bind(this);
-        this.authenticate = this.authenticate.bind(this);
-        this.clearError = this.clearError.bind(this);
-        this.onConnected = this.onConnected.bind(this);
-        this.onDisconnected = this.onDisconnected.bind(this);
-        this.onPlayerStateChanged = this.onPlayerStateChanged.bind(this);
-        this.onPlayerContextChanged = this.onPlayerContextChanged.bind(this);
-        this.endSession = this.endSession.bind(this);
-    }
+  constructor(props: any) {
+    super(props);
+    this.onError = this.onError.bind(this);
+    this.authenticate = this.authenticate.bind(this);
+    this.clearError = this.clearError.bind(this);
+    this.onConnected = this.onConnected.bind(this);
+    this.onDisconnected = this.onDisconnected.bind(this);
+    this.onPlayerStateChanged = this.onPlayerStateChanged.bind(this);
+    this.onPlayerContextChanged = this.onPlayerContextChanged.bind(this);
+    this.endSession = this.endSession.bind(this);
+  }
 
-    componentDidMount() {
-        remote.on("remoteConnected", this.onConnected);
-        remote.on("remoteDisconnected", this.onDisconnected);
-        remote.on("playerStateChanged", this.onPlayerStateChanged);
-        remote.on("playerContextChanged", this.onPlayerContextChanged);
+  componentDidMount() {
+    remote.on('remoteConnected', this.onConnected);
+    remote.on('remoteDisconnected', this.onDisconnected);
+    remote.on('playerStateChanged', this.onPlayerStateChanged);
+    remote.on('playerContextChanged', this.onPlayerContextChanged);
 
-        auth.getSession().then((session) => {
-            if (session != undefined && session.accessToken != undefined) {
-                this.setState((state) => ({ ...state, token: session.accessToken }))
-                remote.connect(session.accessToken)
-                    .then(() => this.setState((state) => ({
-                        ...state,
-                        isConnected: true
-                    })))
-                    .catch(this.onError);
-            }
-        });
-    }
+    auth.getSession().then(session => {
+      if (session != undefined && session.accessToken != undefined) {
+        this.setState(state => ({ ...state, token: session.accessToken }));
+        remote
+          .connect(session.accessToken)
+          .then(() =>
+            this.setState(state => ({
+              ...state,
+              isConnected: true,
+            })),
+          )
+          .catch(this.onError);
+      }
+    });
+  }
 
-    componentWillUnmount() {
-        remote.removeAllListeners();
-    }
+  componentWillUnmount() {
+    remote.removeAllListeners();
+  }
 
-    private onError(error: Error) {
-        this.setState((state) => ({ ...state, error }))
-    }
+  private onError(error: Error) {
+    this.setState(state => ({ ...state, error }));
+  }
 
-    private clearError() {
-        this.setState((state) => ({ ...state, error: undefined }));
-    }
+  private clearError() {
+    this.setState(state => ({ ...state, error: undefined }));
+  }
 
-    private onConnected() {
-        this.setState((state) => ({
-            ...state,
-            isConnected: true
-        }));
-    }
+  private onConnected() {
+    this.setState(state => ({
+      ...state,
+      isConnected: true,
+    }));
+  }
 
-    private onDisconnected() {
-        this.setState((state) => ({
-            ...state,
-            isConnected: false
-        }));
-    }
+  private onDisconnected() {
+    this.setState(state => ({
+      ...state,
+      isConnected: false,
+    }));
+  }
 
-    private onPlayerStateChanged(playerState: PlayerState) {
-        this.setState((state) => ({
-            ...state,
-            playerState
-        }));
+  private onPlayerStateChanged(playerState: PlayerState) {
+    this.setState(state => ({
+      ...state,
+      playerState,
+    }));
+  }
+
+  private onPlayerContextChanged(playerContext: PlayerContext) {
+    this.setState(state => ({
+      ...state,
+      playerContext,
+    }));
+  }
+
+  private endSession() {
+    auth.endSession().then(() => {
+      remote.disconnect().then(() => {
+        this.setState({ isConnected: false, token: undefined });
+      });
+    });
+  }
+
+  private async authenticate({
+    playURI,
+    showDialog = false,
+    authType,
+  }: AuthOptions = {}) {
+    const config: ApiConfig = {
+      clientID: Config.SPOTIFY_CLIENT_ID,
+      redirectURL: Config.SPOTIFY_REDIRECT_URL,
+      tokenRefreshURL: Config.SPOTIFY_TOKEN_REFRESH_URL,
+      tokenSwapURL: Config.SPOTIFY_TOKEN_SWAP_URL,
+      scopes: [ApiScope.AppRemoteControlScope],
+      playURI,
+      showDialog,
+      authType,
     };
 
-    private onPlayerContextChanged(playerContext: PlayerContext) {
-        this.setState((state) => ({
-            ...state,
-            playerContext
-        }));
-    };
+    try {
+      // Go and check if things are connected
+      const isConnected = await remote.isConnectedAsync();
+      this.setState(state => ({
+        ...state,
+        isConnected,
+      }));
 
-    private endSession() {
-        auth.endSession().then(() => {
-            remote.disconnect().then(() => {
-                this.setState({ isConnected: false, token: undefined });
-            });
-        });
+      // Initialize the session
+      const { accessToken: token } = await auth.authorize(config);
+      this.setState(state => ({
+        ...state,
+        token,
+      }));
+      await remote.connect(token);
+    } catch (err) {
+      if (err instanceof Error) {
+        this.onError(err);
+      }
     }
+  }
 
-    private async authenticate({ playURI, showDialog = false, authType }: AuthOptions = {}) {
-        const config: ApiConfig = {
-            clientID: Config.SPOTIFY_CLIENT_ID,
-            redirectURL: Config.SPOTIFY_REDIRECT_URL,
-            tokenRefreshURL: Config.SPOTIFY_TOKEN_REFRESH_URL,
-            tokenSwapURL: Config.SPOTIFY_TOKEN_SWAP_URL,
-            scopes: [ApiScope.AppRemoteControlScope],
-            playURI,
-            showDialog,
-            authType
-        };
+  render() {
+    const { children } = this.props;
 
-        try {
-            // Go and check if things are connected
-            const isConnected = await remote.isConnectedAsync()
-            this.setState((state) => ({
-                ...state,
-                isConnected
-            }));
-
-            // Initialize the session
-            const { accessToken: token } = await auth.authorize(config);
-            this.setState((state) => ({
-                ...state,
-                token
-            }));
-            await remote.connect(token);
-        } catch (err) {
-            if (err instanceof Error) {
-                this.onError(err);
-            }
-        }
-    }
-
-    render() {
-        const { children } = this.props
-
-        return (
-            <AppContext.Provider
-                value={{
-                    ...DefaultContext,
-                    ...this.state,
-                    onError: this.onError,
-                    authenticate: this.authenticate,
-                    clearError: this.clearError,
-                    endSession: this.endSession
-                }}
-            >
-                {children}
-            </AppContext.Provider>
-        )
-    }
+    return (
+      <AppContext.Provider
+        value={{
+          ...DefaultContext,
+          ...this.state,
+          onError: this.onError,
+          authenticate: this.authenticate,
+          clearError: this.clearError,
+          endSession: this.endSession,
+        }}>
+        {children}
+      </AppContext.Provider>
+    );
+  }
 }
 
 export default AppContext;

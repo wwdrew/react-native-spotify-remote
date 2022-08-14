@@ -2,7 +2,8 @@ import React from 'react';
 import { SafeAreaView } from 'react-native-safe-area-context';
 
 import { Authenticate } from './Authenticate';
-import EnvVars from './EnvVars';
+import { EnvVars } from './EnvVars';
+
 import styles from './styles';
 
 export function AppLayout() {

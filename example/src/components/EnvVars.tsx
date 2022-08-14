@@ -4,12 +4,16 @@ import { View, Button, Text } from 'native-base';
 
 import styles from './styles';
 
-export default function EnvVars() {
+export function EnvVars() {
   const [show, setShow] = useState(false);
+
+  function toggleShow() {
+    setShow(!show);
+  }
 
   return (
     <View style={styles.container}>
-      <Button onPress={() => setShow(!show)}>
+      <Button onPress={toggleShow}>
         <Text>Environment Variables</Text>
       </Button>
       {show ? (

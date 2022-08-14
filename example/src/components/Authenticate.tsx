@@ -51,6 +51,7 @@ export function Authenticate() {
 const styles = StyleSheet.create({
   container: {
     justifyContent: 'space-evenly',
+    flexGrow: 1,
   },
   heading: {
     fontSize: 28,

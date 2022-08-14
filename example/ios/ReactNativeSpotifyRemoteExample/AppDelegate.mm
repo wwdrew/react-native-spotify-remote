@@ -6,6 +6,10 @@
 
 #import <React/RCTAppSetupUtils.h>
 
+// react-native-spotify-remote
+#import <RNSpotifyRemote.h>
+// /react-native-spotify-remote
+
 #if RCT_NEW_ARCH_ENABLED
 #import <React/CoreModulesPlugins.h>
 #import <React/RCTCxxBridgeDelegate.h>
@@ -59,6 +63,13 @@ static NSString *const kRNConcurrentRoot = @"concurrentRoot";
   [self.window makeKeyAndVisible];
   return YES;
 }
+
+// react-native-spotify-remote
+- (BOOL)application:(UIApplication *)application openURL:(NSURL *)URL options:(NSDictionary<UIApplicationOpenURLOptionsKey, id> *)options
+{
+  return [[RNSpotifyRemoteAuth sharedInstance] application:application openURL:URL options:options];
+}
+// /react-native-spotify-remote
 
 /// This method controls whether the `concurrentRoot`feature of React18 is turned on or off.
 ///

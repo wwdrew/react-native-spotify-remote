@@ -14,8 +14,8 @@ Pod::Spec.new do |s|
 
   s.source       = { :git => package['repository']['url'], :tag => "v#{s.version}", :submodules => true }
   s.source_files  = "ios/*.{h,m}","ios/external/SpotifySDK/SpotifyiOS.framework/**/Headers/*.{h,m}"
-  s.preserve_path = "ios/external/SpotifySDK/SpotifyiOS.framework"
-  s.vendored_frameworks = "ios/external/SpotifySDK/SpotifyiOS.framework"
+  s.preserve_path = "ios/external/SpotifySDK/SpotifyiOS.xcframework"
+  s.vendored_frameworks = "ios/external/SpotifySDK/SpotifyiOS.xcframework"
 
   s.dependency 'React-Core'
   

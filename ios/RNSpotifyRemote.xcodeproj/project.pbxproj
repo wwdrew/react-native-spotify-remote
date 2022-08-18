@@ -8,7 +8,6 @@
 
 /* Begin PBXBuildFile section */
 		D64EA9822183767C001B053B /* RNSpotifyRemoteAuth.m in Sources */ = {isa = PBXBuildFile; fileRef = D64EA980218375B0001B053B /* RNSpotifyRemoteAuth.m */; };
-		D658F0DF2164059C004649AB /* SpotifyiOS.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = D658F0DE2164059C004649AB /* SpotifyiOS.framework */; };
 		D67AF66E216D18E900859404 /* RNSpotifyRemoteConvert.m in Sources */ = {isa = PBXBuildFile; fileRef = A00A83BC1FB5188A00394AF0 /* RNSpotifyRemoteConvert.m */; };
 		D67AF673216E725000859404 /* RNSpotifyRemoteSubscriptionCallback.m in Sources */ = {isa = PBXBuildFile; fileRef = D67AF672216E725000859404 /* RNSpotifyRemoteSubscriptionCallback.m */; };
 		D67AF675216EC14700859404 /* RNSpotifyItem.m in Sources */ = {isa = PBXBuildFile; fileRef = D67AF674216EC14700859404 /* RNSpotifyItem.m */; };
@@ -39,7 +38,6 @@
 		A0C233712036800A0063A745 /* RNSpotifyRemotePromise.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = RNSpotifyRemotePromise.m; sourceTree = "<group>"; };
 		D64EA980218375B0001B053B /* RNSpotifyRemoteAuth.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = RNSpotifyRemoteAuth.m; sourceTree = "<group>"; };
 		D64EA981218375B0001B053B /* RNSpotifyRemoteAuth.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = RNSpotifyRemoteAuth.h; sourceTree = "<group>"; };
-		D658F0DE2164059C004649AB /* SpotifyiOS.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = SpotifyiOS.framework; path = external/SpotifySDK/SpotifyiOS.framework; sourceTree = "<group>"; };
 		D67AF671216E722E00859404 /* RNSpotifyRemoteSubscriptionCallback.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = RNSpotifyRemoteSubscriptionCallback.h; sourceTree = "<group>"; };
 		D67AF672216E725000859404 /* RNSpotifyRemoteSubscriptionCallback.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = RNSpotifyRemoteSubscriptionCallback.m; sourceTree = "<group>"; };
 		D67AF674216EC14700859404 /* RNSpotifyItem.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = RNSpotifyItem.m; sourceTree = "<group>"; };
@@ -58,7 +56,6 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				D658F0DF2164059C004649AB /* SpotifyiOS.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -102,7 +99,6 @@
 		A0A434191FAE254F0073DAB9 /* Frameworks */ = {
 			isa = PBXGroup;
 			children = (
-				D658F0DE2164059C004649AB /* SpotifyiOS.framework */,
 			);
 			name = Frameworks;
 			sourceTree = "<group>";
@@ -146,6 +142,7 @@
 			developmentRegion = English;
 			hasScannedForEncodings = 0;
 			knownRegions = (
+				English,
 				en,
 			);
 			mainGroup = 58B511D21A9E6C8500147676;

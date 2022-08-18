@@ -37,6 +37,7 @@
 		13B07FB61A68108700A75B9A /* Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; name = Info.plist; path = ReactNativeSpotifyRemoteExample/Info.plist; sourceTree = "<group>"; };
 		13B07FB71A68108700A75B9A /* main.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = main.m; path = ReactNativeSpotifyRemoteExample/main.m; sourceTree = "<group>"; };
 		19F6CBCC0A4E27FBF8BF4A61 /* libPods-ReactNativeSpotifyRemoteExample-ReactNativeSpotifyRemoteExampleTests.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = "libPods-ReactNativeSpotifyRemoteExample-ReactNativeSpotifyRemoteExampleTests.a"; sourceTree = BUILT_PRODUCTS_DIR; };
+		3A56CB4528AE6E7000D65EAB /* SpotifyiOS.xcframework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcframework; name = SpotifyiOS.xcframework; path = ../../ios/external/SpotifySDK/SpotifyiOS.xcframework; sourceTree = "<group>"; };
 		3B4392A12AC88292D35C810B /* Pods-ReactNativeSpotifyRemoteExample.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-ReactNativeSpotifyRemoteExample.debug.xcconfig"; path = "Target Support Files/Pods-ReactNativeSpotifyRemoteExample/Pods-ReactNativeSpotifyRemoteExample.debug.xcconfig"; sourceTree = "<group>"; };
 		5709B34CF0A7D63546082F79 /* Pods-ReactNativeSpotifyRemoteExample.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-ReactNativeSpotifyRemoteExample.release.xcconfig"; path = "Target Support Files/Pods-ReactNativeSpotifyRemoteExample/Pods-ReactNativeSpotifyRemoteExample.release.xcconfig"; sourceTree = "<group>"; };
 		5B7EB9410499542E8C5724F5 /* Pods-ReactNativeSpotifyRemoteExample-ReactNativeSpotifyRemoteExampleTests.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-ReactNativeSpotifyRemoteExample-ReactNativeSpotifyRemoteExampleTests.debug.xcconfig"; path = "Target Support Files/Pods-ReactNativeSpotifyRemoteExample-ReactNativeSpotifyRemoteExampleTests/Pods-ReactNativeSpotifyRemoteExample-ReactNativeSpotifyRemoteExampleTests.debug.xcconfig"; sourceTree = "<group>"; };
@@ -99,6 +100,7 @@
 		2D16E6871FA4F8E400B85C8A /* Frameworks */ = {
 			isa = PBXGroup;
 			children = (
+				3A56CB4528AE6E7000D65EAB /* SpotifyiOS.xcframework */,
 				ED297162215061F000B7C4FE /* JavaScriptCore.framework */,
 				5DCACB8F33CDC322A6C60F78 /* libPods-ReactNativeSpotifyRemoteExample.a */,
 				19F6CBCC0A4E27FBF8BF4A61 /* libPods-ReactNativeSpotifyRemoteExample-ReactNativeSpotifyRemoteExampleTests.a */,

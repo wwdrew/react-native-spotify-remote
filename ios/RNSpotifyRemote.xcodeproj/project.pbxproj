@@ -289,7 +289,7 @@
 					/Applications/Xcode.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/include,
 					"$(SRCROOT)/../../../React/**",
 					"$(SRCROOT)/../../react-native/React/**",
-					"$(PROJECT_DIR)/external/SpotifySDK/SpotifyiOS.framework/Headers",
+					"$(PROJECT_DIR)/external/SpotifySDK/SpotifyiOS.xcframework/Headers",
 				);
 				LIBRARY_SEARCH_PATHS = (
 					"$(inherited)",
@@ -313,7 +313,7 @@
 					/Applications/Xcode.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/include,
 					"$(SRCROOT)/../../../React/**",
 					"$(SRCROOT)/../../react-native/React/**",
-					"$(PROJECT_DIR)/external/SpotifySDK/SpotifyiOS.framework/Headers",
+					"$(PROJECT_DIR)/external/SpotifySDK/SpotifyiOS.xcframework/Headers",
 				);
 				LIBRARY_SEARCH_PATHS = (
 					"$(inherited)",
